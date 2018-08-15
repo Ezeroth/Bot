@@ -6,3 +6,4 @@ Bot.sln
 Bot/config.json
 Bot/discordBotIcon.png
 stupidthing.js
+/Bot/node_modules
