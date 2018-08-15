@@ -5,5 +5,4 @@ obj/
 Bot.sln
 Bot/config.json
 Bot/discordBotIcon.png
-Bot/package.json
-Bot/package-lock.json
+stupidthing.js
