@@ -1,15 +1,16 @@
 const Discord = require('discord.js');
-const config = require('C:/Bot/Bot/config.json');
+const config = require('C:/Bot/Bot/betaConfig.json');
 const client = new Discord.Client();
 const { Client, RichEmbed } = require('discord.js');
 const prefix = config.prefix
 
-const sendSuccessEmbed = (title, description) => {
+const sendSuccessEmbed = (title, description, imageURL => {
     client.on('message', message => {
         const embed = new RichEmbed()
             .setTitle(title)
             .setColor(0xFF0000)
-            .setDescription(description);
+            .setDescription(description)
+            .setImage(imageURL)
         message.channel.send(embed);
     })
 };
@@ -57,4 +58,4 @@ client.on('message', message => {
     }
 });
 
-client.login(config.token);
+client.login(betaConfig.token);
