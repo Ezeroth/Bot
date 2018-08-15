@@ -2,12 +2,7 @@ const Discord = require('discord.js');
 const config = require('C:/Bot/Bot/config.json');
 const client = new Discord.Client();
 const { Client, RichEmbed } = require('discord.js');
-
-const command = (commandCode) => {
-    client.on('message', msg => {
-        commandCode
-    });
-}
+const prefix = config.prefix
 
 const sendSuccessEmbed = (title, description) => {
     client.on('message', message => {
@@ -28,18 +23,31 @@ client.on('ready', () => {
     console.log('I am ready!');
 });
 
-client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) {
-        return;
 
-        const args = message.content.slice(prefix.length).split(' ');
-        const command = args.shift().toLowerCase();
-    } else if (command === 'args-info') {
+client.on('message', message => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+    if (command === 'args-info') {
         if (!args.length) {
             return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
         }
 
         message.channel.send(`Command name: ${command}\nArguments: ${args}`);
+    } else if (command === 'avatar') {
+        if (!message.mentions.users.size) {
+            const embed = new RichEmbed()
+                .setTitle('Your avatar')
+                .setColor(0xFF0000)
+                .setDescription(`URL: Your avatar: ${message.author.displayAvatarURL}`)
+                .setImage(message.author.displayAvatarURL)
+            message.channel.send(embed);
+        }
+    } else if (command === 'invite') {
+        const embed = new RichEmbed()
+            .setDescription('You can invite me using [this link](https://discordapp.com/oauth2/authorize?client_id=478677061607620609&scope=bot)')
+        message.channel.send(embed)
     }
 });
 
@@ -48,12 +56,5 @@ client.on('message', message => {
         message.channel.send('Pong.')
     }
 });
-
-client.on('message', msg => {
-    if (msg.content === 'ping') {
-        msg.reply('pong');
-    }
-});
-
 
 client.login(config.token);
