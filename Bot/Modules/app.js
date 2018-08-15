@@ -52,11 +52,18 @@ client.on('message', message => {
 
         message.channel.send(`You wanted to kick: ${taggedUser.username}`);
     } else if (command === 'avatar') {
-        console.log('outside the if statement')
         if (!message.mentions.users.size) {
-            message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
-            console.log('inside the if statement');
+            const embed = new RichEmbed()
+                .setTitle('Your avatar')
+                .setColor(0xFF0000)
+                .setDescription(`URL: Your avatar: ${message.author.displayAvatarURL}`)
+                .setImage(message.author.displayAvatarURL)
+            message.channel.send(embed);
         }
+    } else if (command === 'invite') {
+        const embed = new RichEmbed()
+            .setDescription('You can invite me using [this link](https://discordapp.com/oauth2/authorize?client_id=478677061607620609&scope=bot)')
+        message.channel.send(embed)
     }
 });
 
