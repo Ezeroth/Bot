@@ -1,20 +1,7 @@
 const Discord = require('discord.js');
-const config = require('C:/Bot/Bot/betaConfig.json');
+const { prefix, token } = require('C:/Bot/Bot/config.json');
 const client = new Discord.Client();
 const { Client, RichEmbed } = require('discord.js');
-const prefix = config.prefix
-
-const sendSuccessEmbed = (title, description, imageURL => {
-    client.on('message', message => {
-        const embed = new RichEmbed()
-            .setTitle(title)
-            .setColor(0xFF0000)
-            .setDescription(description)
-            .setImage(imageURL)
-        message.channel.send(embed);
-    })
-};
-
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -45,17 +32,33 @@ client.on('message', message => {
                 .setImage(message.author.displayAvatarURL)
             message.channel.send(embed);
         }
+
+        const avatarList = message.mentions.users.map(user => {
+            return `${user.username}'s avatar: ${user.displayAvatarURL}`;
+        });
+
+
+        message.channel.send(avatarList);
     } else if (command === 'invite') {
         const embed = new RichEmbed()
-            .setDescription('You can invite me using [this link](https://discordapp.com/oauth2/authorize?client_id=478677061607620609&scope=bot)')
+            .setDescription('You can invite me using [this link](https://discordapp.com/oauth2/authorize?client_id=478677061607620609&permissions=8&scope=bot)')
         message.channel.send(embed)
+    } else if (command === 'prune') {
+        const amount = parseInt(args[0]) + 1;
+
+        if (isNaN(amount)) {
+            return message.reply('that doesn\'t seem to be a valid number.');
+        }
+        else if (amount < 1 || amount > 100) {
+            return message.reply('You need to input a number under 100.');
+        }
+        else if (amount > 1 || amount < 100) {
+            message.channel.bulkDelete(amount, true).catch(err => {
+                console.error(err);
+                message.channel.send('there was an error trying to prune messages in this channel!');
+            });
+        }
     }
 });
 
-client.on('message', message => {
-    if (message.content === '!ping') {
-        message.channel.send('Pong.')
-    }
-});
-
-client.login(betaConfig.token);
+client.login(token);
