@@ -32,7 +32,11 @@ client.on('message', message => {
     }
     catch (error) {
         console.error(error);
-        message.reply('there was an error trying to execute that command!');
+        const embed = new RichEmbed()
+            .setTitle('Command Failed')
+            .setDescription(`Command ${commandName} failed. Please check that you are using it correctly and try again.`)
+            .setColor(0xFF0000)
+        message.reply(embed);
     }
 });
 
