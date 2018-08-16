@@ -3,7 +3,7 @@ const { Client, RichEmbed } = require('discord.js');
 module.exports = {
     name: 'avatar',
     description: 'Returns the avatar of the user running the command if ran without parameters. If ran with mentions, it will display the avatar of all mentioned users.',
-    execute(message, args) {
+    execute(client, message, args) {
         if (!message.mentions.users.size) {
             const embed = new RichEmbed()
                 .setTitle('Your avatar')

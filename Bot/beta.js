@@ -1,12 +1,19 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('C:/Bot/Bot/betaConfig.json');
+const { prefix, ownerID, token } = require('C:/Bot/Bot/betaConfig.json');
 const { Client, RichEmbed } = require('discord.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+const clean = text => {
+    if (typeof (text) === "string")
+        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    else
+        return text;
+}
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -28,7 +35,7 @@ client.on('message', message => {
     const command = client.commands.get(commandName);
 
     try {
-        command.execute(message, args);
+        command.execute(client, message, args);
     }
     catch (error) {
         console.error(error);
@@ -37,6 +44,25 @@ client.on('message', message => {
             .setDescription(`Command ${commandName} failed. Please check that you are using it correctly and try again.`)
             .setColor(0xFF0000)
         message.reply(embed);
+    }
+});
+
+client.on("message", message => {
+    const args = message.content.split(" ").slice(1);
+
+    if (message.content.startsWith(prefix + "eval")) {
+        if (message.author.id !== ownerID) return;
+        try {
+            const code = args.join(" ");
+            let evaled = eval(code);
+
+            if (typeof evaled !== "string")
+                evaled = require("util").inspect(evaled);
+
+            message.channel.send(clean(evaled), { code: "xl" });
+        } catch (err) {
+            message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+        }
     }
 });
 

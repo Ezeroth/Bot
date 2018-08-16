@@ -3,7 +3,7 @@ const { Client, RichEmbed } = require('discord.js');
 module.exports = {
     name: 'ban',
     description: 'Bans the mentioned user from the server it\'s ran in',
-    execute(message, args) {
+    execute(client, message, args) {
         if (message.member.hasPermission('BAN_MEMBERS')) {
             const user = message.mentions.users.first();
             if (!user) {
