@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, ownerID, token } = require('C:/Bot/Bot/config.json');
 const { Client, RichEmbed } = require('discord.js');
+const { goodColor, badColor } = require('C:/Bot/Bot/config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -46,6 +47,43 @@ client.on('message', message => {
         message.reply(embed);
     }
 });
+
+client.on("message", message => {
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+
+    const helpCommandName = args
+
+    if (message.content.startsWith(prefix + "help")) {
+        if (!message.author.bot) {
+            if (helpCommandName === null) {
+                const embed = new RichEmbed()
+                    .setDescription('YELL AT EZE TO MAKE HELP STRING')
+                    .setColor(goodColor)
+                message.channel.send(embed)
+            } else
+                try {
+                    const helpString = require(`C:/Bot/Bot/commands/${helpCommandName}.js`);
+
+                    const embed = new RichEmbed()
+                        .setColor(goodColor)
+                        .setTitle(`Help string for ${helpCommandName}.`)
+                        .setDescription(helpString.description)
+                    message.channel.send(embed)
+                }
+                catch (error) {
+                    console.error(error);
+                    const embed = new RichEmbed()
+                        .setTitle('Unknown Command')
+                        .setDescription(`I couldn't find that command.`)
+                        .setColor(0xFF0000)
+                    message.reply(embed);
+                }
+        }
+    }
+})
+
 
 client.on("message", message => {
     const args = message.content.split(" ").slice(1);
