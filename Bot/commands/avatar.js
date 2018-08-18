@@ -1,4 +1,5 @@
 const { Client, RichEmbed } = require('discord.js');
+const { goodColor, badColor } = require('C:/Bot/Bot/config.json');
 
 module.exports = {
     name: 'avatar',
@@ -7,7 +8,7 @@ module.exports = {
         if (!message.mentions.users.size) {
             const embed = new RichEmbed()
                 .setTitle('Your avatar')
-                .setColor(0xFF0000)
+                .setColor(goodColor)
                 .setDescription(`URL: Your avatar: ${message.author.displayAvatarURL}`)
                 .setImage(message.author.displayAvatarURL)
             message.channel.send(embed);

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, ownerID, token } = require('C:/Bot/Bot/betaConfig.json');
+const { prefix, ownerID, token } = require('C:/Bot/Bot/config.json');
 const { Client, RichEmbed } = require('discord.js');
 
 const client = new Discord.Client();
@@ -8,7 +8,7 @@ client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-function clean(text) {
+const clean = text => {
     if (typeof (text) === "string")
         return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
     else
@@ -46,30 +46,23 @@ client.on('message', message => {
         message.reply(embed);
     }
 });
- /*
-client.on("message", message => {
-    const command = client.commands.get(commandName);
-    const args = message.content.split(" ").slice(1)
 
-
-})
-*/
 client.on("message", message => {
     const args = message.content.split(" ").slice(1);
 
     if (message.content.startsWith(prefix + "eval")) {
-        if (message.author.id === ownerID) 
-        try {
-            const code = args.join(" ");
-            let evaled = eval(code);
+        if (message.author.id === ownerID)
+            try {
+                const code = args.join(" ");
+                let evaled = eval(code);
 
-            if (typeof evaled !== "string")
-                evaled = require("util").inspect(evaled);
+                if (typeof evaled !== "string")
+                    evaled = require("util").inspect(evaled);
 
-            message.channel.send(clean(evaled), { code: "xl" });
-        } catch (err) {
-            message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-        }
+                message.channel.send(clean(evaled), { code: "xl" });
+            } catch (err) {
+                message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+            }
     }
 });
 

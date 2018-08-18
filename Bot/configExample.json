@@ -1,0 +1,9 @@
+{
+  "prefix": "INSERT_YOUR_BOT_PREFIX",
+  "ownerID": "INSERT_YOUR_DISCORD_USER_ID",
+  "token": "INSERT_YOUR_BOT_TOKEN_HERE",
+  "goodColor": "0xFF0000",
+  "badColor": "0x00FF00"
+}
+
+// Once you have set up this file, rename it to config.json and the bot should run properly.

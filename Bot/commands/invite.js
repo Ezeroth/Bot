@@ -1,4 +1,5 @@
 const { Client, RichEmbed } = require('discord.js');
+const { goodColor, badColor } = require('C:/Bot/Bot/config.json');
 
 module.exports = {
     name: 'invite',
@@ -6,6 +7,7 @@ module.exports = {
     execute(client, message, args) {
         const embed = new RichEmbed()
             .setDescription('You can invite me using [this link](https://discordapp.com/oauth2/authorize?client_id=478677061607620609&permissions=8&scope=bot)')
+            .setColor(goodColor)
         message.channel.send(embed)
     },
 };
