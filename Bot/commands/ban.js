@@ -9,7 +9,7 @@ module.exports = {
             const user = message.mentions.members.first();
             if (user.bannable) {
                 message.guild.ban(user.id)
-                    .then(user => console.log(`Banned ${user.username || user.id || user} from ${guild}`))
+                    .then(user => console.log(`Banned ${user.username || user.id || user} from ${message.guild}`))
                     .catch(console.error);
                 const embed = new RichEmbed()
                     .setTitle(`User Successfully banned from ${message.guild.name} server.`)
