@@ -5,7 +5,7 @@ module.exports = {
     name: 'prune',
     description: 'Deletes x amount of messages in the channel where it is executed.',
     execute(client, message, args) {
-        if (message.author.hasPermission("MANAGE_MESSAGES")) {
+        if (message.member.hasPermission("MANAGE_MESSAGES")) {
             const amount = parseInt(args[0]) + 1;
 
             if (isNaN(amount)) {
@@ -20,7 +20,7 @@ module.exports = {
                     message.channel.send('there was an error trying to prune messages in this channel!');
                 });
             };
-        } else if (!message.author.hasPermission("MANAGE_MESSAGES")) {
+        } else if (!message.member.hasPermission("MANAGE_MESSAGES")) {
             const embed = new RichEmbed()
                 .setTitle('Missing Permissions')
                 .setColor(badColor)
