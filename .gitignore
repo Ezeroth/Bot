@@ -6,7 +6,7 @@ Bot.sln
 Bot/config.json
 stupidthing.js
 /Bot/node_modules
-/Bot/betaConfig.json
+Bot/betaConfig.json
 /Bot/Assets
 /bot.sln
 /Bot/beta.js
