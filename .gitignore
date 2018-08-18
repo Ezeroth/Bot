@@ -2,11 +2,10 @@
 .vs/
 bin/
 obj/
-Bot.sln
-Bot/config.json
 stupidthing.js
-/Bot/node_modules
+Bot/node_modules
+Bot/Assets
+bot.sln
+Bot/beta.js
+Bot/config.json
 Bot/betaConfig.json
-/Bot/Assets
-/bot.sln
-/Bot/beta.js
