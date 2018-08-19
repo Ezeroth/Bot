@@ -103,4 +103,12 @@ client.on("message", message => {
     }
 });
 
+client.on("message", message => {
+    const role = '479603451006025729'
+
+    if (message.channel.id === '478679577175261185' && message.content === 'agree') {
+        message.guild.member.addRole(role)
+    }
+})
+
 client.login(token);
