@@ -84,18 +84,16 @@ client.on("message", message => {
     }
 })
 
-
 client.on("message", message => {
     const role = '479603451006025729'
 
     if (message.channel.id === '478679577175261185' && message.content === 'agree') {
-        message.guild.member.addRole(role)
+        message.member.addRole(role)
         const embed = new RichEmbed()
             .setTitle('Successfully Added Aquanatics Role')
             .setColor(goodColor)
     }
 })
-
 
 client.on("message", message => {
     const args = message.content.split(" ").slice(1);
