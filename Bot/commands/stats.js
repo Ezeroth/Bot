@@ -19,6 +19,7 @@ module.exports = {
             .addField('Bot ID', '478677061607620609')
             .addField('Server Name', serverName)
             .addField('Presence', `${serverCount} servers.\n${channelCount} channels.\n${userCount} users.`)
+            .addField('Links', '[Donate to the project](https://patreon.com/EzeDiscordBot)\n[Support Server](https://discord.gg/wQ78Bg6)\n[PayPal](https://paypal.me/ShareefOkeefe)')
             .setThumbnail(botAv)
         message.channel.send(embed)
     },
