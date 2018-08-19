@@ -57,7 +57,7 @@ client.on("message", message => {
 
     if (message.content.startsWith(prefix + "help")) {
         if (!message.author.bot) {
-            if (helpCommandName === null) {
+            if (!helpCommandName) {
                 const embed = new RichEmbed()
                     .setDescription('YELL AT EZE TO MAKE HELP STRING')
                     .setColor(goodColor)
@@ -72,13 +72,13 @@ client.on("message", message => {
                     .setDescription(helpString.description)
                 message.channel.send(embed)
             }
-                catch (error) {
+            catch (error) {
                 console.error(error);
                 const embed = new RichEmbed()
                     .setTitle('Unknown Command')
                     .setDescription(`I couldn't find that command.`)
-                    .setColor(0xFF0000)
-                message.reply(embed);
+                    .setColor(badColor)
+                message.channel.send(embed);
             }
         }
     }
