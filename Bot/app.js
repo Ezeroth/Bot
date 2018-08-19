@@ -90,7 +90,7 @@ client.on("message", message => {
     if (message.channel.id === '478679577175261185' && message.content === 'agree') {
         message.member.addRole(role)
         const embed = new RichEmbed()
-            .setTitle('Successfully Added Aquanatics Role')
+            .setDescription('Successfully Added Aquanatics Role')
             .setColor(goodColor)
     }
 })
