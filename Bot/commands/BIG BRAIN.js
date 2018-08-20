@@ -6,7 +6,7 @@ module.exports = {
     description: 'WHO HAS BIG BRAIN WINS',
     execute(client, message, args) {
 
-        const brainPower = Math.floor(Math.random() * 1000)
+        const brainPower = Math.floor(Math.random() * 1001)
         let brainImageGen = Math.floor(brainPower / 100)
         let brainImage = 'https://i.imgur.com/WCIRn2d.png'
         switch (brainImageGen) {
@@ -46,16 +46,16 @@ module.exports = {
         }
 
 
-        if (!args) {
+        if (message.mentions.members) {
             const embed = new RichEmbed()
                 .setDescription(`${message.author.tag} has ${brainPower} brain powers`)
                 .setColor(goodColor)
                 .setImage(brainImage)
             message.channel.send(embed)
-        } else if (message.mentions.members) {
+        } else {
             const brained = message.mentions.members;
             const embed = new RichEmbed()
-                .setDescription(`${message.author.tag} has ${brainPower} brain powers`)
+                .setDescription(`${message.author.tag}, ${brained.displayName} has ${brainPower} brain powers`)
                 .setColor(goodColor)
                 .setImage(brainImage)
             message.channel.send(embed)
