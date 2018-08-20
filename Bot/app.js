@@ -85,6 +85,24 @@ client.on("message", message => {
 })
 
 client.on("message", message => {
+    if (message.guild.id === '446804554248355842' && message.content.startsWith("member")) {
+        if (message.member.hasPermission("ADMINISTRATOR")) {
+            const icon = message.guild.iconURL
+
+            message.mentions.members.first().addRole('448980272344727582')
+            const embed = new RichEmbed()
+                .setDescription(`Welcome ${message.mentions.users.first()} to the Heavens Wrath King's Raid guild. If you have any questions or are ever in need of advice, feel free to ask in <#446804554827431937>! `)
+                .setColor(0x15D6EF)
+                .setImage(icon)
+
+            message.channel.send(embed)
+        } else {
+            message.channel.send('This is an officer only command.')
+        }
+    }
+})
+
+client.on("message", message => {
     const role = '479603451006025729'
 
     if (message.channel.id === '478679577175261185' && message.content === 'agree') {
