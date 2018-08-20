@@ -2,7 +2,7 @@ const { Client, RichEmbed } = require('discord.js');
 const { goodColor, badColor, ownerID } = require('C:/Bot/Bot/config.json');
 
 module.exports = {
-    name: 'mega_brain',
+    name: 'brain',
     description: 'WHO HAS BIG BRAIN WINS',
     execute(client, message, args) {
 
