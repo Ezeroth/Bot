@@ -11,9 +11,6 @@ module.exports = {
             const roleName = roleName2.toLowerCase()
             const roleId = message.guild.roles.find(role => role.name.toLowerCase() === roleName);
             const member = message.mentions.members.first();
-            console.log(roleName1)
-            console.log(roleName)
-            console.log(roleId)
 
             if (roleId === undefined) {
                 const embed = new RichEmbed()
