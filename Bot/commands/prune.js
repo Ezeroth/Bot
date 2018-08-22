@@ -1,5 +1,5 @@
 const { Client, RichEmbed } = require('discord.js');
-const badColor = require('C:/Bot/Bot/config.json')
+const badColor = require('./config.json')
 
 module.exports = {
     name: 'prune',

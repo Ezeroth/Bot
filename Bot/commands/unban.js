@@ -1,13 +1,14 @@
 const Client = require('discord.js');
 const RichEmbed = require('discord.js');
-const { goodColor, badColor } = require('C:/Bot/Bot/config.json');
+const { goodColor, badColor } = require('./config.json');
 
 module.exports = {
     name: 'unban',
     description: 'Unbans a user from the server where the command is ran, only accepts user id.',
     execute(client, message, args) {
         const u = args[0]
-        if (!message.member.hasPermissions("BAN_MEMBERS")) {
+
+        if (!message.member.hasPermission("BAN_MEMBERS")) {
             const embed = new RichEmbed()
                 .setTitle('Missing Permissions')
                 .setDescription('You need the BAN_MEMBERS permission to use this command.')

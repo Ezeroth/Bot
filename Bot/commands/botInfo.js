@@ -1,5 +1,5 @@
 const { Client, RichEmbed } = require('discord.js');
-const { goodColor, badColor, ownerID } = require('C:/Bot/Bot/config.json');
+const { goodColor, badColor, ownerID } = require('./config.json');
 
 module.exports = {
     name: 'BotInfo',

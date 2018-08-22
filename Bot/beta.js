@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, ownerID, token } = require('C:/Bot/Bot/betaConfig.json');
-const { goodColor, badColor } = require('C:/Bot/Bot/config.json');
+const { prefix, ownerID, token } = require('./commands/betaConfig.json');
+const { goodColor, badColor } = require('./commands/betaConfig.json');
 const { Client, RichEmbed } = require('discord.js');
 
 const client = new Discord.Client();
@@ -88,7 +88,7 @@ client.on("message", message => {
     const args = message.content.split(" ").slice(1);
 
     if (message.content.startsWith(prefix + "eval")) {
-        if (message.author.id === ownerID) 
+        if (message.author.id === '348164462672347142') 
         try {
             const code = args.join(" ");
             let evaled = eval(code);
