@@ -43,7 +43,7 @@ client.on('message', message => {
         const embed = new RichEmbed()
             .setTitle('Command Failed')
             .setDescription(`${message.author.tag}, command ${commandName} failed. Please check that you are using it correctly and try again.`)
-            .setColor(0xFF0000)
+            .setColor(badColor)
         message.channel.send(embed)
     }
 });

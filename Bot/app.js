@@ -43,7 +43,7 @@ client.on('message', message => {
         const embed = new RichEmbed()
             .setTitle('Command Failed')
             .setDescription(`${message.author.tag}, command ${commandName} failed. Please check that you are using it correctly and try again.`)
-            .setColor(0xFF0000)
+            .setColor(badColor)
         message.reply(embed);
     }
 });
@@ -60,7 +60,7 @@ client.on("message", message => {
             if (helpCommandName === null) {
                 const embed = new RichEmbed()
                     .setDescription('YELL AT EZE TO MAKE HELP STRING')
-                    .setColor(goodColor)
+                    .setColor(badColor)
                 message.channel.send(embed)
             } else
                 try {
@@ -77,7 +77,7 @@ client.on("message", message => {
                     const embed = new RichEmbed()
                         .setTitle('Unknown Command')
                         .setDescription(`I couldn't find that command.`)
-                        .setColor(0xFF0000)
+                        .setColor(badColor)
                     message.channel.send(embed);
                 }
         }
