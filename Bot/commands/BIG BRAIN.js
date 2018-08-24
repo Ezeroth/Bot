@@ -46,16 +46,16 @@ module.exports = {
         }
 
 
-        if (message.mentions.members) {
+        if (!args[0]) {
             const embed = new RichEmbed()
                 .setDescription(`${message.author.tag} has ${brainPower} brain powers`)
                 .setColor(goodColor)
                 .setImage(brainImage)
             message.channel.send(embed)
         } else {
-            const brained = message.mentions.members;
+            const brained = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
             const embed = new RichEmbed()
-                .setDescription(`${message.author.tag}, ${brained.displayName} has ${brainPower} brain powers`)
+                .setDescription(`${message.author.tag}, ${brained.user.tag} has ${brainPower} brain powers`)
                 .setColor(goodColor)
                 .setImage(brainImage)
             message.channel.send(embed)
