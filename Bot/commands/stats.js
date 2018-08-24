@@ -13,7 +13,7 @@ module.exports = {
         const botAv = client.user.displayAvatarURL
 
         const embed = new RichEmbed()
-            .setTitle('Bot Information')
+            .setTitle(`Ravea Bot v${version}`)
             .setColor(goodColor)
             .addField('About', 'I am a general purpose discord bot that was created by Eze#8999. I am currently in my early testing stages, however I should be fully usable by the end of the month supposing I face no major issues. If you\'d like to have a commmand added, feel free to DM Eze#8999 or join the support server(linked at the bottom)')
             .addField('Bot ID', '478677061607620609')

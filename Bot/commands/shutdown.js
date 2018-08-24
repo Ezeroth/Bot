@@ -8,8 +8,8 @@ module.exports = {
     execute(client, message, args) {
         const embed = new RichEmbed()
             .setDescription('Shutting down')
-            .setColor(0xFF0000)
+            .setColor(goodColor)
         message.channel.send(embed)
-        client.destroy()
+        process.exit
     }
 }
