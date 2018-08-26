@@ -9,7 +9,7 @@ module.exports = {
             const embed = new RichEmbed()
                 .setTitle('Your avatar')
                 .setColor(goodColor)
-                .setDescription(`(Your avatar){${message.author.displayAvatarURL}}`)
+                .setDescription(`URL: Your avatar: ${message.author.displayAvatarURL}`)
                 .setImage(message.author.displayAvatarURL)
             message.channel.send(embed);
         }
