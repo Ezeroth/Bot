@@ -46,6 +46,8 @@ client.on('message', message => {
             .setColor(badColor)
         message.reply(embed);
     }
+    
+    console.log(`Command ${commandName} Ran\nUser: ${message.author.tag}\nChannel: ${message.channel.id}\nGuild: ${message.guild.id}\nContent: ${message.content}\n`)
 });
 
 client.on("message", message => {
@@ -57,29 +59,45 @@ client.on("message", message => {
 
     if (message.content.startsWith(prefix + "help")) {
         if (!message.author.bot) {
-            if (helpCommandName === null) {
-                const embed = new RichEmbed()
-                    .setDescription('YELL AT EZE TO MAKE HELP STRING')
-                    .setColor(badColor)
-                message.channel.send(embed)
-            } else
-                try {
-                    const helpString = require(`C:/Bot/Bot/commands/${helpCommandName}.js`);
+            if (message.channel.type === 'text') {
+                if (!args[0]) {
+                    const serverName = message.guild.name
+                    const ping = client.ping
+                    const serverCount = client.guilds.size
+                    const channelCount = client.channels.size
+                    const userCount = client.users.size
+                    const botAv = client.user.displayAvatarURL
+                    const version = require('./commands/config.json')
 
                     const embed = new RichEmbed()
+                        .setTitle(`Ravea Bot v${version}`)
                         .setColor(goodColor)
-                        .setTitle(`Help string for ${helpCommandName}.`)
-                        .setDescription(helpString.description)
+                        .addField('About', 'I am a general purpose discord bot that was created by Eze#8999. I am currently in my early testing stages, however I should be fully usable by the end of the month supposing I face no major issues. If you\'d like to have a commmand added, feel free to DM Eze#8999 or join the support server(linked at the bottom)')
+                        .addField('Bot ID', '478677061607620609')
+                        .addField('Server Name', serverName)
+                        .addField('Presence', `${serverCount} servers.\n${channelCount} channels.\n${userCount} users.`)
+                        .addField('Links', '[Support Server](https://discord.gg/wQ78Bg6)\n[Invite Me To Your Server](https://discordapp.com/oauth2/authorize?client_id=478677061607620609&permissions=8&scope=bot)')
+                        .setThumbnail(botAv)
                     message.channel.send(embed)
-                }
-                catch (error) {
-                    console.error(error);
-                    const embed = new RichEmbed()
-                        .setTitle('Unknown Command')
-                        .setDescription(`I couldn't find that command.`)
-                        .setColor(badColor)
-                    message.channel.send(embed);
-                }
+                } else
+                    try {
+                        const helpString = require(`C:/Bot/Bot/commands/${helpCommandName}.js`);
+
+                        const embed = new RichEmbed()
+                            .setColor(goodColor)
+                            .setTitle(`Help string for ${helpCommandName}.`)
+                            .setDescription(helpString.description)
+                        message.channel.send(embed)
+                    }
+                    catch (error) {
+                        console.error(error);
+                        const embed = new RichEmbed()
+                            .setTitle('Unknown Command')
+                            .setDescription(`I couldn't find that command.`)
+                            .setColor(badColor)
+                        message.channel.send(embed);
+                    }
+            }
         }
     }
 })

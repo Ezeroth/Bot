@@ -9,6 +9,7 @@ client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+
 function clean(text) {
     if (typeof (text) === "string")
         return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -46,6 +47,7 @@ client.on('message', message => {
             .setColor(badColor)
         message.channel.send(embed)
     }
+    console.log(`Command ${commandName} Ran\nUser: ${message.author.tag}\nChannel: ${message.channel.id}\nGuild: ${message.guild.id}\nContent: ${message.content}\n`)
 });
  
 client.on("message", message => {
@@ -57,32 +59,42 @@ client.on("message", message => {
 
     if (message.content.startsWith(prefix + "help")) {
         if (!message.author.bot) {
-            if (!helpCommandName) {
-                const embed = new RichEmbed()
-                    .setDescription('YELL AT EZE TO MAKE HELP STRING')
-                    .setColor(goodColor)
-                message.channel.send(embed)
-            } else
-                try {
-                const helpString = require(`C:/Bot/Bot/commands/${helpCommandName}.js`);
+            if (args[0]) {
+                const helpString = require(`./commands/${helpCommandName}.js`);
 
                 const embed = new RichEmbed()
                     .setColor(goodColor)
                     .setTitle(`Help string for ${helpCommandName}.`)
                     .setDescription(helpString.description)
                 message.channel.send(embed)
-            }
-            catch (error) {
-                console.error(error);
+            } else {
                 const embed = new RichEmbed()
-                    .setTitle('Unknown Command')
-                    .setDescription(`I couldn't find that command.`)
-                    .setColor(badColor)
-                message.channel.send(embed);
-            }
+                    .setDescription('YELL AT EZE TO MAKE HELP STRING')
+                    .setColor(goodColor)
+                message.channel.send(embed)
+            } 
         }
     }
 })
+
+
+client.on("message", message => {
+    if (message.content.startsWith(prefix + "commands")) {
+        fs.readdir('./commands', (err, files) => {
+            const description =
+            files.forEach(function (file) {
+                commandFiles.name + '\n';
+                });
+
+            const embed = new RichEmbed()
+                .setTitle('All Commands')
+                .setColor(goodColor)
+                .setDescription(description)
+            message.channel.send(embed);
+        });
+    }
+});
+
 
 client.on("message", message => {
     const args = message.content.split(" ").slice(1);
